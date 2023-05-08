@@ -1,0 +1,5 @@
+name: LibrEssentials
+main: mc.libre.nobodyspecial.LibrEssentials
+version: 0.0a
+api-version: 1.19
+commands:

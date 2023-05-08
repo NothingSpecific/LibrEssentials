@@ -9,4 +9,12 @@ LibrEssentials blocks chat reporting by default, but this feature can be toggled
 
 This plugin will not force you to disable chat reports, but it does assume that chat reports should be opt-in for servers that want the protection, not opt-out for servers that don't. See [BetterNCR/README.md](https://github.com/NothingSpecific/BetterNCR/blob/main/README.md) for more information about global chat reporting and why you should consider keeping it disabled on your server.
 
+---
+
+## Building
+
+This project is developed using Eclipse Java. Since the classpath contains system-specific file paths, I created an `init.py` script that rewrites system-specific classpath information.
+
+Before opening this project in Eclipse, you should make sure to run `init.py`. After asking you for the location of your Spigot shaded API JAR file, it will automatically fix the project's classpath to work on your system.
+
 *Note: This plugin is licensed under the [GNU AGPL 3.0 license](https://www.gnu.org/licenses/agpl-3.0.en.html), but can also be licensed under [BSD 3-clause](https://opensource.org/license/BSD-3-clause/) upon request. For anyone considering contributing to this project, please understand that your contributions may be distributed under [AGPLv3](https://www.gnu.org/licenses/agpl-3.0.en.html) or [BSD 3-clause](https://opensource.org/license/BSD-3-clause/).*
