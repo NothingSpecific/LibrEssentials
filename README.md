@@ -21,4 +21,8 @@ Before opening this project in Eclipse, you should make sure to run `init.py`. A
 
 I develop on a GNU+Linux system and have not tested the build process on a Windows development system. But I'm sure you can figure it out. If `init.py` needs to be updated to work on Windows systems, submit a PR and I'll look into officially adding support for development on Windows systems.
 
-*Note: This plugin is licensed under the [GNU AGPL 3.0 license](https://www.gnu.org/licenses/agpl-3.0.en.html), but can also be licensed under [BSD 3-clause](https://opensource.org/license/BSD-3-clause/) upon request. For anyone considering contributing to this project, please understand that your contributions may be distributed under [AGPLv3](https://www.gnu.org/licenses/agpl-3.0.en.html) or [BSD 3-clause](https://opensource.org/license/BSD-3-clause/).*
+---
+
+### *Licensing*
+
+*This plugin is licensed under the [GNU AGPL 3.0 license](https://www.gnu.org/licenses/agpl-3.0.en.html), but can also be licensed under [BSD 3-clause](https://opensource.org/license/BSD-3-clause/) upon request. For anyone considering contributing to this project, please understand that your contributions may be distributed under [AGPLv3](https://www.gnu.org/licenses/agpl-3.0.en.html) or [BSD 3-clause](https://opensource.org/license/BSD-3-clause/).*

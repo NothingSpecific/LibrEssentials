@@ -1,5 +1,17 @@
 name: LibrEssentials
-main: mc.libre.nobodyspecial.LibrEssentials
-version: 0.0a
+main: mc.libre.nobodyspecial.libressentials.LibrEssentials
+version: 0.0a+1
 api-version: 1.19
 commands:
+   ncr:
+      description: Toggle chat reports on this server
+      usage: /ncr
+      permission: libressentials.ncr
+      aliases:
+         - ncrtoggle
+         - togglechatreports
+         
+permissions:
+   libressentials.ncr:
+      description: Allows toggling chat reports on this server
+      default: op
