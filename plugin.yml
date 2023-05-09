@@ -6,7 +6,7 @@ commands:
    ncr:
       description: Toggle chat reports on this server
       usage: /ncr
-      permission: libressentials.ncr
+      permission: libressentials.admin.ncr
       aliases:
          - ncrtoggle
          - togglechatreports
