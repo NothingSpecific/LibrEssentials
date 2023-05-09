@@ -12,6 +12,6 @@ commands:
          - togglechatreports
          
 permissions:
-   libressentials.ncr:
+   libressentials.admin.ncr:
       description: Allows toggling chat reports on this server
       default: op

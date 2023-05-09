@@ -26,7 +26,7 @@ public class ToggleNCR extends L2CommandHandler {
 
 	@Override
 	public boolean hasPermission(CommandSender sender, Command command, String alias, String[] args) {
-		return sender.hasPermission("libressentials.ncr");
+		return sender.hasPermission("libressentials.admin.ncr");
 	}
 
 	@Override
