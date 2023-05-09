@@ -13,6 +13,11 @@ import org.bukkit.plugin.java.JavaPlugin;
  * The L1CommandHandler identified which L2CommandHandler is responsible for executing the specified command,
  * checks if the CommandSender has permission to execute the command, and if yes, passes the command to the
  * L2CommandHandler responsible for executing the command
+ * 
+ * Is this necessary? Not strictly. But if I'm reimplementing a plugin as large as Essentials I'm making my
+ * life easier by adding an abstraction layer to handle command registration
+ * 
+ * Also, the custom permission checking this enables allows more flexibility in the future
  *  
  * @author NothingSpecific
  *

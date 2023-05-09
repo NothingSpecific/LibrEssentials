@@ -25,7 +25,7 @@ public class LibrEssentials extends JavaPlugin {
     	server.getPluginManager().registerEvents(new PlayerChatRewriter(this), this);
     	l1ch = new L1CommandHandler(this);
     	l1ch.onEnable();
-    	PluginRegistrationHelper.registerPlugins(this);
+    	CommandRegistrationHelper.registerCommands(this);
     }
     @Override
     public void onLoad() {
