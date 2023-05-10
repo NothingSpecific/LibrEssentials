@@ -16,9 +16,6 @@ public class LibrEssentials extends JavaPlugin {
 	private FileConfiguration config = null;
 	private L1CommandHandler l1ch;
 	
-	private String permissionErrorMessage = "§l§eLibrE§l§cssentials§r§7:§r §4Permission error§r.";
-	private boolean blockChatReports = true; // Default to true unless server admin specifies otherwise
-	
     @Override
     public void onEnable() {
     	server = getServer();
@@ -30,30 +27,51 @@ public class LibrEssentials extends JavaPlugin {
     @Override
     public void onLoad() {
     	config = getConfig();
-    	config.addDefault("permissionErrorMessage", permissionErrorMessage);
-    	permissionErrorMessage = config.getString("permissionErrorMessage");
-    	config.set("permissionErrorMessage", permissionErrorMessage);
+    	config.addDefault("permissionErrorMessage", Config.permissionErrorMessage);
+    	Config.permissionErrorMessage = config.getString("permissionErrorMessage");
+    	config.set("permissionErrorMessage", Config.permissionErrorMessage);
+
+    	config.addDefault("blockChatReports", Config.blockChatReports);
+    	Config.blockChatReports = config.getBoolean("blockChatReports");
+    	config.set("blockChatReports", Config.blockChatReports);
+
+    	config.addDefault("playerAfkSeconds", Config.playerAfkSeconds);
+    	Config.playerAfkSeconds = config.getLong("playerAfkSeconds");
+    	config.set("playerAfkSeconds", Config.playerAfkSeconds);
+
+    	config.addDefault("playerAfkKickSeconds", Config.playerAfkKickSeconds);
+    	Config.playerAfkKickSeconds = config.getLong("playerAfkKickSeconds");
+    	config.set("playerAfkKickSeconds", Config.playerAfkKickSeconds);
     	
-    	config.addDefault("blockChatReports", blockChatReports);
-    	blockChatReports = config.getBoolean("blockChatReports");
-    	config.set("blockChatReports", blockChatReports);
+
+    	config.addDefault("playerAfkKickMessage", Config.playerAfkKickMessage);
+    	Config.playerAfkKickMessage = config.getString("playerAfkKickMessage");
+    	config.set("playerAfkKickMessage", Config.playerAfkKickMessage);
+
+    	config.addDefault("playerAfkKickedMessage", Config.playerAfkKickedMessage);
+    	Config.playerAfkKickedMessage = config.getString("playerAfkKickedMessage");
+    	config.set("playerAfkKickedMessage", Config.playerAfkKickedMessage);
+
+    	config.addDefault("playerAfkMessage", Config.playerAfkMessage);
+    	Config.playerAfkMessage = config.getString("playerAfkMessage");
+    	config.set("playerAfkMessage", Config.playerAfkMessage);
+    	
+    	config.addDefault("playerUnAfkMessage", Config.playerUnAfkMessage);
+    	Config.playerUnAfkMessage = config.getString("playerUnAfkMessage");
+    	config.set("playerUnAfkMessage", Config.playerUnAfkMessage);
     	
     	saveConfig();
     }
-    // Fired when plugin is disabled
     @Override
     public void onDisable() {
     	saveConfig();
     }
     public void sendPermissionError(CommandSender sender) {
-    	sender.sendMessage(permissionErrorMessage);
-    }
-    public boolean shouldBlockChatReports() {
-    	return blockChatReports;
+    	sender.sendMessage(Config.permissionErrorMessage);
     }
     public void setBlockChatReports(boolean blockChatReports) {
     	if(blockChatReports)
-    		this.blockChatReports = blockChatReports;
+    		Config.blockChatReports = blockChatReports;
     	config.set("blockChatReports", blockChatReports);
     	saveConfig();
     }

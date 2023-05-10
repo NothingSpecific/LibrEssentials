@@ -6,12 +6,29 @@ commands:
    ncr:
       description: Toggle chat reports on this server
       usage: /ncr
-      permission: libressentials.admin.ncr
       aliases:
          - ncrtoggle
          - togglechatreports
+   afk:
+      description: Toggles your AFK status
+      usage: /afk
          
 permissions:
    libressentials.admin.ncr:
       description: Allows toggling chat reports on this server
       default: op
+   essentials.afk:
+      description: Allows access to /afk
+      default: true
+   essentials.afk.message:
+      description: Allows you to set an AFK message
+      default: op
+   essentials.afk.others:
+      description: Allows you to set other players' AFK status
+      default: op
+   essentials.afk.auto:
+      description: Players with this permission are automatically set as AFK after a configurable amount of time
+      default: true
+   essentials.afk.kickexempt:
+      description: Players with this permission are not AFK kicked
+      default: false

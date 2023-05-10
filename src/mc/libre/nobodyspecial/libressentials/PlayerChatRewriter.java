@@ -17,7 +17,7 @@ public class PlayerChatRewriter implements Listener {
 	 */
     @EventHandler(priority=EventPriority.HIGHEST)
     public void onChat(AsyncPlayerChatEvent e){
-    	if(!parent.shouldBlockChatReports())
+    	if(!Config.blockChatReports)
     		return;	// Avoid any handling of chat messages if the admin has chosen to allow chat reports on this server
     	
     	if(e.isCancelled())

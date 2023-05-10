@@ -7,6 +7,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 /**
  * Layer 1 handler for commands issued to this plugin
@@ -40,25 +41,42 @@ public class L1CommandHandler implements CommandExecutor {
 	 * Registers a command and all its aliases to a given L2CommandHandler
 	 * This will infer the the command to be registered from the L2CommandHandler's 
 	 * 
+	 * By default, associated event listeners will also be registered
+	 * 
 	 * @param l2Handler The L2CommandHandler responsible for handling the command
 	 */
 	public void registerL2Handler(L2CommandHandler l2Handler) {
-		String command = l2Handler.getCommand();
-		PluginCommand c = parent.getCommand(command);
-		commandHandlers.put(command, l2Handler);
-		commandHandlers.put(c.getName(), l2Handler);
-		commandHandlers.put(c.getLabel(), l2Handler);
-		for(String s : c.getAliases()){
-			commandHandlers.put(s, l2Handler);
-		}
+		registerL2Handler(l2Handler, true);
+	}
+	/**
+	 * Registers a command and all its aliases to a given L2CommandHandler
+	 * This will infer the the command to be registered from the L2CommandHandler's 
+	 * 
+	 * @param l2Handler The L2CommandHandler responsible for handling the command
+	 * @param registerListeners Whether to register the associated event listeners
+	 */
+	public void registerL2Handler(L2CommandHandler l2Handler, boolean registerListeners) {
+		registerL2Handler(l2Handler, l2Handler.getCommand(), registerListeners);
+	}
+	/**
+	 * Registers a command and all its aliases to a given L2CommandHandler
+	 * 
+	 * By default, associated event listeners will also be registered
+	 * 
+	 * @param l2Handler The L2CommandHandler responsible for handling the command
+	 * @param command The command to be handled by l2Handler
+	 */
+	public void registerL2Handler(L2CommandHandler l2Handler, String command) {
+		registerL2Handler(l2Handler, command, true);
 	}
 	/**
 	 * Registers a command and all its aliases to a given L2CommandHandler
 	 * 
 	 * @param l2Handler The L2CommandHandler responsible for handling the command
 	 * @param command The command to be handled by l2Handler
+	 * @param registerListeners Whether to register the associated event listeners
 	 */
-	public void registerL2Handler(L2CommandHandler l2Handler, String command) {
+	public void registerL2Handler(L2CommandHandler l2Handler, String command, boolean registerListeners) {
 		PluginCommand c = parent.getCommand(command);
 		commandHandlers.put(command, l2Handler);
 		commandHandlers.put(c.getName(), l2Handler);
@@ -66,6 +84,21 @@ public class L1CommandHandler implements CommandExecutor {
 		for(String s : c.getAliases()){
 			commandHandlers.put(s, l2Handler);
 		}
+		if(registerListeners && (l2Handler instanceof Listener))
+			parent.getServer().getPluginManager().registerEvents((Listener) l2Handler, parent);
+	}
+	/**
+	 * Registers a command to be handled by a given L2CommandHandler, but does not register any aliases
+	 * Useful if you want certain aliases to be handled by a different handler
+	 * You can also pass an alias as `command` and the alias will be registered to l2Handler
+	 * 
+	 * By default, associated event listeners will also be registered
+	 * 
+	 * @param l2Handler The L2CommandHandler responsible for handling the command/alias
+	 * @param command The command or alias to be handled by l2Handler
+	 */
+	public void registerL2HandlerIgnoreAliases(L2CommandHandler l2Handler, String command) {
+		registerL2HandlerIgnoreAliases(l2Handler, command, true);
 	}
 	/**
 	 * Registers a command to be handled by a given L2CommandHandler, but does not register any aliases
@@ -74,11 +107,14 @@ public class L1CommandHandler implements CommandExecutor {
 	 * 
 	 * @param l2Handler The L2CommandHandler responsible for handling the command/alias
 	 * @param command The command or alias to be handled by l2Handler
+	 * @param registerListeners Whether to register the associated event listeners
 	 */
-	public void registerL2HandlerIgnoreAliases(L2CommandHandler l2Handler, String command) {
-		PluginCommand c = parent.getCommand(command);
+	public void registerL2HandlerIgnoreAliases(L2CommandHandler l2Handler, String command, boolean registerListeners) {
 		commandHandlers.put(command, l2Handler);
+		if(registerListeners && (l2Handler instanceof Listener))
+			parent.getServer().getPluginManager().registerEvents((Listener) l2Handler, parent);
 	}
+	
 	/**
 	 * Executes the command. This method is called by the L1CommandSender responsible for handling LibrEssentials commands
 	 * 
@@ -98,5 +134,10 @@ public class L1CommandHandler implements CommandExecutor {
 			parent.sendPermissionError(sender);
 		}
 		return true;
+	}
+	public void onDisable() {
+		for(L2CommandHandler l2Handler : commandHandlers.values()) {
+			l2Handler.onDisable();
+		}
 	}
 }

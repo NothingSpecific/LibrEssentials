@@ -33,4 +33,11 @@ public abstract class L2CommandHandler {
 	 * @return True if the command is valid, false if the command is invalid
 	 */
 	public abstract boolean hasPermission(CommandSender sender, Command command, String alias, String[] args);
+	/**
+	 * Does any cleanup that needs to be performed when the plugin is disabled or the server is stopped
+	 * By default this does nothing, but L2CommandHandlers that need special cleanup can override this method
+	 */
+	public void onDisable() {
+		// Do nothing unless a specific handler needs a valid onDisable() implementation
+	}
 }
