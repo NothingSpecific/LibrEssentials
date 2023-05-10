@@ -1,5 +1,19 @@
 package mc.libre.nobodyspecial.libressentials;
 
+/**
+ * Configuration information for the plugin
+ * This should only ever be modified from within the LibrEssentials class
+ * using setter and getter methods.
+ * 
+ * I separated this into its own class for ease of development, and I can't make the variables final
+ * because they need to be modified within LibrEssentials' onEnable() method, as well as certain
+ * options being affected by runtime commands
+ * 
+ * Unless you're absolutely sure of what you're doing, treat everything here as immutable!
+ * 
+ * @author NothingSpecific
+ *
+ */
 public abstract class Config {
 	public static String banner = "§r§l§eLibrE§l§cssentials§r";
 
